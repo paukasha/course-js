@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: production ? '[name].[contenthash].js' : '[name].js',
+    filename: '[name].js',
   },
   devtool:'inline-source-map',
   module: {
@@ -72,10 +72,10 @@ plugins: [
   new HtmlWebpackPlugin({
     title: 'Webpack & React',
     template: './src/index.html',
-    favicon: './public/favicon.ico'
+    favicon: production ? './dist/favicon.ico' : './public/favicon.ico'
   }),
   new MiniCssExtractPlugin({
-    filename: production ? '[name].[contenthash].css' : '[name].css',
+    filename:  '[name].css',
   }),
 ],
   devServer: {

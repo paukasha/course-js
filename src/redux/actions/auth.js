@@ -7,7 +7,7 @@ import {setPhotos} from '../mainPageReducer';
 let oauthUrl = 'https://unsplash.com/oauth/token',
   client_id = 'avGYLy8xj-R8I3tiRSkeVZvRV0R39Ws34mZod3qn3Zo',
   client_secret = '5mvRrbXVYQDCpa7fYclguxWgFypVpz5ByKxI4CMAHoA',
-  redirect_uri = 'http://localhost:3001/course-js',
+  redirect_uri = 'http://c914428q.beget.tech/',
   code = '',
   grant_type = 'authorization_code',
   scope = 'public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections',
@@ -20,7 +20,6 @@ export const setOrDeleteLikeByUser = (photo) => {
   return async dispatch => {
       try {
         if (photo.liked_by_user == false) {
-          console.log('ghgh')
           const res = await axios.post(`https://api.unsplash.com/photos/${photo.id}/like/`, null, {
             headers: {
               Authorization: `Bearer ${accessToken}`
@@ -30,7 +29,6 @@ export const setOrDeleteLikeByUser = (photo) => {
           dispatch(setOrDeleteLike(res.data.photo))
           dispatch(setCurrentPhoto(res.data.photo))
         } else {
-          console.log('ghgh123')
               const res = await axios.delete(`https://api.unsplash.com/photos/${photo.id}/like/`, {
                 headers: {
                   Authorization: `Bearer ${accessToken}`
@@ -139,7 +137,6 @@ export const getUserPhoto = (currentPage, isLoading) => {
         }
       }).then(res => {
         res.data.map(el => {
-          console.log(el.id)
         })
         currentPage+= 1
         dispatch(setUserPhotos(res.data, currentPage, res.headers['x-total']))

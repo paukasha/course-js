@@ -16,7 +16,6 @@ function ProfileContent() {
     currentPage = useSelector(state => state.user.currentPage),
     photos = useSelector(state => state.user.userPhotos);
 
-  console.log(isLoading)
 
   useEffect(() => {
     dispatch(getUserPhoto(currentPage, isLoading))

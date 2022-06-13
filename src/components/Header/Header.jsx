@@ -5,6 +5,7 @@ import Location from '@/components/Header/Location/Location';
 import SignIn from '@/components/Header/Signin/Signin';
 import Profile from '@/components/Profile/Profile';
 import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 const Header = () => {
 
@@ -12,7 +13,9 @@ const Header = () => {
 
   return (<div className='container'>
         <header className={st.header}>
-          <img src={logo} className={st.logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} className={st.logo} alt="logo" />
+          </Link>
           <nav>
             <ul className={st.list}>
               <li><a className={st.link} href="#">О нас</a></li>
