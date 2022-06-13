@@ -22,7 +22,7 @@ const App = () => {
   const codeSearchParam = searchParams.get('code')
 
   useEffect(() => {
-    dispatch(auth(codeSearchParam, () => navigate('/photos'), {replace: true}))
+    dispatch(auth(codeSearchParam, () => navigate('photos'), {replace: true}))
     dispatch(getLocation())
     dispatch(getPhotos())
   }, [])
