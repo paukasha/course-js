@@ -9,6 +9,7 @@ import '@import/swiper/swiper-bundle.min.css';
 SwiperCore.use([Pagination, Navigation, A11y]);
 import {useSelector} from 'react-redux';
 import {unsplashAuthLink} from '../../redux/actions/auth';
+import {Link} from 'react-router-dom';
 
 function MainPage() {
 
