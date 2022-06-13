@@ -26,7 +26,6 @@ export default function authReducer(state = defaultState, action) {
         ...state,
         currentUser: action.payload,
         isAuth: true,
-        // isLoading: false
       }
     }
 

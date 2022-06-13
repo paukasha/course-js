@@ -8,12 +8,12 @@ import '@import/swiper/swiper-bundle.min.css';
 
 SwiperCore.use([Pagination, Navigation, A11y]);
 import {useSelector} from 'react-redux';
-import {Outlet} from 'react-router-dom';
 import {unsplashAuthLink} from '../../redux/actions/auth';
 
 function MainPage() {
 
-  const photos = useSelector(state => state.mainPage.photos)
+  const photos = useSelector(state => state.mainPage.photos),
+        isAuth = useSelector(state => state.user.isAuth)
   return (<section>
       <div className={st.photosContainer}>
         <div className={st.mainContainer}>
@@ -56,7 +56,9 @@ function MainPage() {
         </div>
         <div className={st.lookPhoto}>
           <span className={st.lookPhotoText}>Чтобы просмотреть ленту фотографий нажмите «Смотреть ленту»</span>
-          <a href={unsplashAuthLink} className={st.lookPhotoButton}>Смотреть ленту</a>
+          {isAuth ?   <Link  to='/photos' className={st.lookPhotoButton}>Смотреть ленту</Link>
+          :  <a href={unsplashAuthLink} className={st.lookPhotoButton}>Смотреть ленту</a>}
+
         </div>
       </div>
 

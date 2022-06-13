@@ -31,7 +31,7 @@ function ProfileContent() {
       <div className={st.content}>
         {photos.map(photo => <Photo photo={photo} key={photo.id} loading={isLoading}/>)}
       </div>
-      <button className={'btn-reset ' + st.loadMore}
+      <button className={'btn-reset loadMore'}
               onClick={() => loadMore()}>Загрузить еще
       </button>
     </div>
