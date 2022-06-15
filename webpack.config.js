@@ -12,9 +12,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: '[name].js',
+    filename: production ? '[name].[contenthash].js' : '[name].js',
   },
-  devtool:'inline-source-map',
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+  devtool: production ? 'inline-source-map' : false,
   module: {
     rules: [
       {
@@ -50,7 +55,7 @@ module.exports = {
     type: 'asset/resource'
 },
 {
-  test: /\.(woff2|woff)$/i,
+  test: /\.(woff)$/i,
   type: 'asset/resource'
 }
 
@@ -72,10 +77,13 @@ plugins: [
   new HtmlWebpackPlugin({
     title: 'Webpack & React',
     template: './src/index.html',
-    favicon: production ? './dist/favicon.ico' : './public/favicon.ico'
+    favicon: './src/favicon.ico',
+    minify: {
+      collapseWhitespace: production
+    }
   }),
   new MiniCssExtractPlugin({
-    filename:  '[name].css',
+    filename: production ? '[name].[contenthash].css' : '[name].css',
   }),
 ],
   devServer: {
