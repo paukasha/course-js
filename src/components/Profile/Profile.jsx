@@ -1,15 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import st from './profile.m.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/authReducer';
 import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
+
+const Profile = (props) => {
 
   const user = useSelector(state => state.user.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isProfileBtnsShow, setProfileBtnsShow] = useState(false);
+
+  const userProfileRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userProfileRef.current && !userProfileRef.current.contains(event.target)) {
+        setProfileBtnsShow(false)
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [ isProfileBtnsShow ]);
+
 
   const showExitBtn = () => {
     setProfileBtnsShow(!isProfileBtnsShow)
@@ -26,8 +42,7 @@ const Profile = () => {
     navigate('/')
   }
 
-
-  return (<div className={st.userProfile} >
+  return (<div className={st.userProfile}  ref={userProfileRef}>
       <div className={st.userBaseInfo}>
         <span>{user.first_name}</span>
         <div className={st.profileImage} >

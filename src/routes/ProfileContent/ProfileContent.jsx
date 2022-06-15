@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Suspense} from 'react';
 import st from './profileContent.m.css'
 
 
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
-import Photo from '@/components/Photo/Photo';
+// import Photo from '@/components/Photo/Photo';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {getUserPhoto} from '../../redux/actions/auth';
-import {setIsLoading} from '../../redux/authReducer';
+import {getUserPhoto} from '@/redux/actions/auth';
+import {setIsLoading} from '@/redux/authReducer';
+import Spinner from '@/components/Loader/Spinner';
+
+const Photo = React.lazy(() => import('@/components/Photo/Photo'));
 
 function ProfileContent() {
   const dispatch = useDispatch(),
@@ -29,7 +32,9 @@ function ProfileContent() {
 
   return (<div className="container">
       <div className={st.content}>
-        {photos.map(photo => <Photo photo={photo} key={photo.id} loading={isLoading}/>)}
+        {photos.map(photo =>  <Suspense fallback={<Spinner />} key={photo.id}>
+          <Photo photo={photo}  />
+        </Suspense>)}
       </div>
       <button className={'btn-reset ' + st.loadMore}
               onClick={() => loadMore()}>Загрузить еще

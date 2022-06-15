@@ -8,12 +8,13 @@ import '@import/swiper/swiper-bundle.min.css';
 
 SwiperCore.use([Pagination, Navigation, A11y]);
 import {useSelector} from 'react-redux';
-import {Outlet} from 'react-router-dom';
-import {unsplashAuthLink} from '../../redux/actions/auth';
+import {unsplashAuthLink} from '@/redux/actions/auth';
+import {Link} from 'react-router-dom';
 
 function MainPage() {
 
-  const photos = useSelector(state => state.mainPage.photos)
+  const photos = useSelector(state => state.mainPage.photos),
+    isAuth = useSelector(state => state.user.isAuth)
   return (<section>
       <div className={st.photosContainer}>
         <div className={st.mainContainer}>
@@ -38,7 +39,7 @@ function MainPage() {
             <h2 className={st.aboutTitle}>O нас</h2>
             <span className={st.aboutTitleText}>
           Это веб-приложение сделано для&nbsp;защиты дипломного проекта курс
-          «JavaScript с&nbsp;нуля» профессия «Веб-разраотчик» от&nbsp;SkillBox.
+          «JavaScript с&nbsp;нуля» профессия «Веб-разработчик» от&nbsp;SkillBox.
         </span>
           </div>
 
@@ -56,7 +57,8 @@ function MainPage() {
         </div>
         <div className={st.lookPhoto}>
           <span className={st.lookPhotoText}>Чтобы просмотреть ленту фотографий нажмите «Смотреть ленту»</span>
-          <a href={unsplashAuthLink} className={st.lookPhotoButton}>Смотреть ленту</a>
+          {isAuth ? <Link to="photos" className={st.lookPhotoButton}>Смотреть ленту</Link>
+            :  <a href={unsplashAuthLink} className={st.lookPhotoButton}>Смотреть ленту</a>}
         </div>
       </div>
 
