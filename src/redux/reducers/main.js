@@ -8,7 +8,7 @@ const defaultState = {
   isLoading: true,
 }
 
-export default function mainPageReducer(state = defaultState, action) {
+export default function main(state = defaultState, action) {
   switch (action.type) {
     case GET_PHOTOS:
       return {

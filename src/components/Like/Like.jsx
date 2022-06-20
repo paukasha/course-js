@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './like.m.css';
 import like from '@/img/svg/heart.svg';
-import {setOrDeleteLikeByUser} from '../../redux/actions/auth';
-import {useDispatch, useSelector} from 'react-redux';
+import {setOrDeleteLikeByUser} from '@/redux/actions/photos';
+import {useDispatch} from 'react-redux';
 
 const Like = ({currentPhoto}) => {
   const dispatch = useDispatch()
@@ -10,8 +10,9 @@ const Like = ({currentPhoto}) => {
   if (currentPhoto.liked_by_user) {
     setLikeClassName += 'likeByUser'
   }
-  return (<div className={'photoLike '+setLikeClassName} onClick={() => dispatch(setOrDeleteLikeByUser(currentPhoto))}>
-      <img  src={like} alt='like' />
+  return (
+    <div className={'photoLike ' + setLikeClassName} onClick={() => dispatch(setOrDeleteLikeByUser(currentPhoto))}>
+      <img src={like} alt="like"/>
       <span>{currentPhoto.likes}</span>
     </div>
   );
