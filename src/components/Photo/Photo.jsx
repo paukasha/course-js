@@ -14,7 +14,7 @@ const Photo = ({ photo, loading }) => {
       ) : (
         <>
           <Link to={`/photos/${photo.id}`} className={styles.photoLink} />
-          <img className={styles.basePhoto} src={photo.srcBlob} alt="" />
+          <img className={styles.basePhoto} src="data:application/json;base64,eyJ1cmwiOiJodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTY1NjIwMzU0OTgxMS04NWJlNDlhMzc5NjY/aXhsaWI9cmItMS4yLjFcdTAwMjZxPTgwXHUwMDI2Y3M9dGlueXNyZ2JcdTAwMjZmbT1qcGdcdTAwMjZjcm9wPWVudHJvcHkifQ==" alt="" />
           <Like currentPhoto={photo} />
 
           <div className={styles.authorLink}>

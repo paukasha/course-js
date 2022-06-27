@@ -1,54 +1,20 @@
-import React, {useEffect, useRef} from 'react';
-import styles from "./mainPage.m.css";
+import React from 'react';
+import styles from './mainPage.m.css';
 
-import SwiperCore, { Navigation, Pagination, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "@import/swiper/swiper-bundle.min.css";
+import SwiperCore, {A11y, Navigation, Pagination} from 'swiper';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import '@import/swiper/swiper-bundle.min.css';
+import {useSelector} from 'react-redux';
+import {unsplashAuthLink} from '@/redux/actions/auth';
+import {Link} from 'react-router-dom';
 
 SwiperCore.use([Pagination, Navigation, A11y]);
-import { useSelector } from "react-redux";
-import { unsplashAuthLink } from "@/redux/actions/auth";
-import { Link } from "react-router-dom";
-
-
 
 function MainPage() {
 
   const photos = useSelector((state) => state.main.photos),
-    isAuth = useSelector((state) => state.user.isAuth);
-
-  const preloadImage = async (url) => {
-
-    if (!url) {
-      return new Promise((resolve) => {
-        resolve("");
-      });
-    }
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Client-ID avGYLy8xj-R8I3tiRSkeVZvRV0R39Ws34mZod3qn3Zo`,
-      },
-    });
-
-    const blob = await response.blob();
-    const reader = new FileReader();
-
-    reader.readAsDataURL(blob);
-
-    const promise =  new Promise((resolve) => {
-      reader.onload = () => {
-        resolve(reader.result)
-        const img = new Image();
-        img.src = reader.result
-      }
-    })
-
-
-    return promise
-
-  };
-
+        isAuth = useSelector((state) => state.user.isAuth);
+console.log(photos)
   return (<section>
       <div className={styles.photosContainer}>
         <div className={styles.mainContainer}>
@@ -63,18 +29,13 @@ function MainPage() {
             slidesPerView={1}
           >
             {photos.map((el) => {
-              preloadImage(el.links.self).then(res => {
-                // console.log(res);
-
                 return (<SwiperSlide key={el.id}>
-                    <img src={res} />
+                    <img src={el.blobLink}  alt=""/>
                   <span className={styles.mainTitle} >
                     Приложение для&nbsp;просмотра фотографий
                   </span>
                   </SwiperSlide>
                 );
-              })
-
             })}
           </Swiper>
         </div>

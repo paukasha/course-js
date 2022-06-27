@@ -4,7 +4,8 @@ import "./styles.css";
 import MainPage from "@/pages/MainPage/MainPage";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "@/redux/actions/auth";
-import { getLocation, getPhotos } from "@/redux/actions/main";
+import { getLocation } from "@/redux/actions/main";
+import {  getPhotos } from "@/redux/actions/photos";
 import NotFound from "@/pages/NotFound/NotFound";
 
 import Layout from "@/components/Layout/Layout";
@@ -22,7 +23,7 @@ const App = () => {
     dispatch = useDispatch();
 
   const codeSearchParam = searchParams.get("code");
-  const photoses = useSelector((state) => state.main.photos);
+  // const photoses = useSelector((state) => state.main.photos);
   useEffect(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
     let params = Object.fromEntries(urlSearchParams.entries());
@@ -42,7 +43,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage photos={photoses} />} />
+          <Route index element={<MainPage  />} />
           {/* <Route path="photos" element={*/}
 
           {/*     <ProfileContent/>}*/}
