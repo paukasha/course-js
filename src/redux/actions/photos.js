@@ -3,11 +3,10 @@ import {setLocation, setPhotos} from '../reducers/main';
 import {setCurrentPhoto, setOrDeleteLike, setContent} from '../reducers/photos';
 import {setIsLoading} from '../reducers/auth';
 
-import { preloadImage } from '@/helpers/preloadImage'
-
+import {preloadImage} from '@/helpers/preloadImage'
 
 export const getPhotos = () => {
-  let url = "https://api.unsplash.com/photos?per_page=2";
+  let url = 'https://api.unsplash.com/photos?per_page=10';
   return async (dispatch) => {
     try {
       const res = await axios.get(url, {
@@ -17,19 +16,16 @@ export const getPhotos = () => {
       }).then(res => {
         let photosList = res.data
         photosList = photosList.map((el) => {
-          preloadImage(el.links.download_location).then(res => {
+          preloadImage(el.urls.full).then(res => {
             return {
               ...el,
-              blobLink: res
             }
           })
 
           return el
         })
-        console.log(photosList);
         return photosList
       }).then(photosList => {
-        console.log(photosList)
         dispatch(setPhotos(photosList));
       })
 
@@ -49,7 +45,6 @@ export const setOrDeleteLikeByUser = (photo) => {
             Authorization: `Bearer ${accessToken}`
           }
         })
-
         dispatch(setOrDeleteLike(res.data.photo))
         dispatch(setCurrentPhoto(res.data.photo))
       } else {
@@ -76,19 +71,18 @@ export const getCurrentPhoto = (id) => {
 
   return async dispatch => {
     try {
-      return await axios.get(`https://api.unsplash.com/photos/${id}`,  {
+      return await axios.get(`https://api.unsplash.com/photos/${id}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       }).then(res => {
-        return  dispatch(setCurrentPhoto(res.data))
+        let currentPhoto = res.data
+        preloadImage(currentPhoto.urls.full)
+        return dispatch(setCurrentPhoto(currentPhoto))
       })
-
-
     } catch (e) {
       console.log(e)
     }
-
   }
 }
 
@@ -96,17 +90,16 @@ export const getContent = (currentPage, isLoading) => {
   let accessToken = localStorage.getItem('accessToken')
   return async dispatch => {
     if (isLoading) {
-      let photos =   axios.get(`https://api.unsplash.com/photos/?page=${currentPage}&per_page=2`, {
+      let photos = axios.get(`https://api.unsplash.com/photos/?page=${currentPage}&per_page=10`, {
         headers: {
           Authorization: `Client-ID avGYLy8xj-R8I3tiRSkeVZvRV0R39Ws34mZod3qn3Zo`,
         }
       }).then(res => {
         let photos = res.data
         photos = photos.map(el => {
-          preloadImage(el.links.download_location).then(res => {
+          preloadImage(el.urls.full).then(res => {
             return {
               ...el,
-              blobLink: res
             }
           })
 
@@ -114,17 +107,19 @@ export const getContent = (currentPage, isLoading) => {
         })
 
 
-        return  {
+        return {
           photos,
           total: res.headers['x-total']
         }
 
       }).then((res) => {
-        currentPage+= 1
+        currentPage += 1
         dispatch(setContent(res.photos, currentPage, res.total))
+        setIsLoading(false)
       }).finally(() => {
         setIsLoading(false)
       })
     }
   }
 }
+

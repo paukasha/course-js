@@ -13,8 +13,8 @@ SwiperCore.use([Pagination, Navigation, A11y]);
 function MainPage() {
 
   const photos = useSelector((state) => state.main.photos),
-        isAuth = useSelector((state) => state.user.isAuth);
-console.log(photos)
+    isAuth = useSelector((state) => state.user.isAuth);
+
   return (<section>
       <div className={styles.photosContainer}>
         <div className={styles.mainContainer}>
@@ -29,13 +29,13 @@ console.log(photos)
             slidesPerView={1}
           >
             {photos.map((el) => {
-                return (<SwiperSlide key={el.id}>
-                    <img src={el.blobLink}  alt=""/>
-                  <span className={styles.mainTitle} >
+              return (<SwiperSlide key={el.id}>
+                  <img src={el.urls.full} alt=""/>
+                  <span className={styles.mainTitle}>
                     Приложение для&nbsp;просмотра фотографий
                   </span>
-                  </SwiperSlide>
-                );
+                </SwiperSlide>
+              );
             })}
           </Swiper>
         </div>
@@ -56,7 +56,7 @@ console.log(photos)
             <h3 className={styles.dosmthTitle}>В этом приложении вы можете:</h3>
             <ul className={styles.dosmthList}>
               <li className={styles.dosmthItem}>
-                Посмотреть фотографии с сайта{" "}
+                Посмотреть фотографии с сайта{' '}
                 <a href="https://unsplash.com/" className={styles.unsplashLink}>
                   unsplash.com
                 </a>

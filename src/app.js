@@ -1,28 +1,28 @@
-import React, { useEffect, Suspense } from "react";
-import { Route, Routes, useNavigate, useSearchParams } from "react-router-dom";
-import "./styles.css";
-import MainPage from "@/pages/MainPage/MainPage";
-import { useDispatch, useSelector } from "react-redux";
-import { auth } from "@/redux/actions/auth";
-import { getLocation } from "@/redux/actions/main";
-import {  getPhotos } from "@/redux/actions/photos";
-import NotFound from "@/pages/NotFound/NotFound";
+import React, {useEffect, Suspense} from 'react';
+import {Route, Routes, useNavigate, useSearchParams} from 'react-router-dom';
+import './styles.css';
+import MainPage from '@/pages/MainPage/MainPage';
+import {useDispatch, useSelector} from 'react-redux';
+import {auth} from '@/redux/actions/auth';
+import {getLocation} from '@/redux/actions/main';
+import {getPhotos} from '@/redux/actions/photos';
+import NotFound from '@/pages/NotFound/NotFound';
 
-import Layout from "@/components/Layout/Layout";
-import Spinner from "@/components/Loader/Spinner";
+import Layout from '@/components/Layout/Layout';
+import Spinner from '@/components/Loader/Spinner';
 
-import { PrivateAuth } from "./hoc/PrivateAuth";
-import ProfileContent from "./pages/ProfileContent/ProfileContent";
+import {PrivateAuth} from './hoc/PrivateAuth';
+import ProfileContent from './pages/ProfileContent/ProfileContent';
 
 // const ProfileContent = React.lazy(() => import('@/routes/ProfileContent/ProfileContent'));
-const PhotoPage = React.lazy(() => import("@/pages/PhotoPage/PhotoPage"));
+const PhotoPage = React.lazy(() => import('@/pages/PhotoPage/PhotoPage'));
 
 const App = () => {
   const navigate = useNavigate(),
     [searchParams, setSearchParams] = useSearchParams(),
     dispatch = useDispatch();
 
-  const codeSearchParam = searchParams.get("code");
+  const codeSearchParam = searchParams.get('code');
   // const photoses = useSelector((state) => state.main.photos);
   useEffect(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
@@ -32,7 +32,7 @@ const App = () => {
       auth(params?.code, () => {
         params.toString();
         window.history.pushState({}, document.title, window.location.pathname);
-        navigate("photos");
+        navigate('photos');
       })
     );
     dispatch(getLocation());
@@ -42,8 +42,8 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage  />} />
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<MainPage/>}/>
           {/* <Route path="photos" element={*/}
 
           {/*     <ProfileContent/>}*/}
@@ -54,9 +54,9 @@ const App = () => {
             path="photos"
             element={
               <PrivateAuth>
-                <Suspense fallback={<Spinner />}>
-                  <ProfileContent />
-                </Suspense>
+                {/*<Suspense fallback={<Spinner/>}>*/}
+                  <ProfileContent/>
+                {/*</Suspense>*/}
               </PrivateAuth>
             }
           />
@@ -65,13 +65,13 @@ const App = () => {
             path="photos/:photoId"
             element={
               <PrivateAuth>
-                <Suspense fallback={<Spinner />}>
-                  <PhotoPage />
+                <Suspense fallback={<Spinner/>}>
+                  <PhotoPage/>
                 </Suspense>
               </PrivateAuth>
             }
           />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound/>}/>
         </Route>
       </Routes>
     </>

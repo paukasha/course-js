@@ -18,13 +18,13 @@ export const login = () => {
   return async dispatch => {
     if (accessToken) {
       try {
-         await axios.get('https://api.unsplash.com/me', {
+        await axios.get('https://api.unsplash.com/me', {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
         }).then(res => {
-           dispatch(setUser(res.data))
-         })
+          dispatch(setUser(res.data))
+        })
 
       } catch (e) {
         localStorage.removeItem('accessToken')
@@ -42,7 +42,7 @@ export const auth = (codeSearchParam, cback) => {
     if (codeSearchParam) {
 
       try {
-       return await axios.post(oauthUrl, null, {
+        return await axios.post(oauthUrl, null, {
             params: {
               client_id: client_id,
               client_secret: client_secret,
@@ -67,7 +67,7 @@ export const auth = (codeSearchParam, cback) => {
         console.log(e)
       }
     } else if (accessToken) {
-        dispatch(login())
+      dispatch(login())
     }
   }
 }

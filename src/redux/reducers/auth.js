@@ -1,5 +1,5 @@
 const LOGIN = 'LOGIN',
-      LOGOUT = 'LOGOUT',
+  LOGOUT = 'LOGOUT',
   IS_LOADING = 'IS_LOADING';
 
 const defaultState = {
@@ -34,7 +34,8 @@ export default function auth(state = defaultState, action) {
         isLoading: action.payload
       }
 
-    default: return state
+    default:
+      return state
   }
 }
 

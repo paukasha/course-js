@@ -1,21 +1,21 @@
-import React from "react";
-import styles from "./photo.m.css";
-import "../Loader/spinner.m.css";
-import { Link } from "react-router-dom";
-import Like from "../Like/Like";
-import Spinner from "../Loader/Spinner";
-import { useSelector } from "react-redux";
+import React from 'react';
+import styles from './photo.m.css';
+import '../Loader/spinner.m.css';
+import {Link} from 'react-router-dom';
+import Like from '../Like/Like';
+import Spinner from '../Loader/Spinner';
+import {useSelector} from 'react-redux';
 
-const Photo = ({ photo, loading }) => {
+const Photo = ({photo, loading}) => {
   return (
     <div className={styles.photoContent}>
       {loading ? (
-        <Spinner />
+        <Spinner/>
       ) : (
         <>
-          <Link to={`/photos/${photo.id}`} className={styles.photoLink} />
-          <img className={styles.basePhoto} src="data:application/json;base64,eyJ1cmwiOiJodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTY1NjIwMzU0OTgxMS04NWJlNDlhMzc5NjY/aXhsaWI9cmItMS4yLjFcdTAwMjZxPTgwXHUwMDI2Y3M9dGlueXNyZ2JcdTAwMjZmbT1qcGdcdTAwMjZjcm9wPWVudHJvcHkifQ==" alt="" />
-          <Like currentPhoto={photo} />
+          <Link to={`/photos/${photo.id}`} className={styles.photoLink}/>
+          <img className={styles.basePhoto} src={photo.urls.full} alt=""/>
+          <Like currentPhoto={photo}/>
 
           <div className={styles.authorLink}>
             <a
@@ -28,7 +28,7 @@ const Photo = ({ photo, loading }) => {
                 src={photo.user.profile_image.medium}
                 alt="author photo"
               />
-              {photo.user.name}
+              <span className={styles.authorName}>{photo.user.name}</span>
             </a>
           </div>
         </>

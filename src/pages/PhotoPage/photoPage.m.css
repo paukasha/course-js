@@ -14,10 +14,8 @@
   display: flex;
   padding: 10px 20px;
   height: 80px;
-  background-color:  rgb(82 73 73 / 60%);
+  background-color: rgb(82 73 73 / 60%);
   opacity: 0;
-  /*z-index: 10;*/
-  /*opacity: 1;*/
   z-index: 15;
   transition: opacity .4s ease-in-out;
   color: var(--color-white);
@@ -25,7 +23,7 @@
   line-height: 30px;
 }
 
-.fullPhotoDescr  span {
+.fullPhotoDescr span {
   display: inline-block;
   font-size: 14px;
 }
@@ -43,6 +41,7 @@
   display: flex;
   align-items: center;
 }
+
 .fullPhotoDescr:last-child > span {
   display: inline-block;
   margin-right: 10px;
@@ -50,6 +49,7 @@
   opacity: 0.6;
   transition: opacity .3s linear;
 }
+
 /*.fullPhotoInfo > span:last-child {*/
 /*  margin-left: auto;*/
 /*}*/
@@ -74,7 +74,7 @@
   opacity: 1;
 }
 
-.fullPhotoLikeBlock:hover :global(.photoLike) {
+.fullPhotoWrapper:hover :global(.photoLike) {
   transition: opacity .3s linear;
   opacity: 1;
 }
@@ -90,21 +90,21 @@
   font-size: 16px;
   border-radius: 5px;
   background-color: var(--color-white);
-  color:  var(--color-eminence);
+  color: var(--color-eminence);
   padding: 6px 10px;
-  transition: color  .3s ease-in-out, background-color .3s ease-in-out;
+  transition: color .3s ease-in-out, background-color .3s ease-in-out;
 }
 
 .backBtn:hover {
   background-color: var(--color-eminence);
   color: var(--color-white);
-  transition: color  .3s ease-in-out, background-color .3s ease-in-out;
+  transition: color .3s ease-in-out, background-color .3s ease-in-out;
 }
 
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   .fullPhotoInfo,
-  .fullPhotoLikeBlock :global(.photoLike){
+  .fullPhotoLikeBlock :global(.photoLike) {
     opacity: 1;
   }
 
@@ -118,22 +118,23 @@
     white-space: nowrap;
   }
 
-  .fullPhotoDescr span{
+  .fullPhotoDescr span {
     font-size: 12px;
   }
+
   .fullPhotoDescr:not(:last-child) {
     margin-right: 20px;
   }
 
   .fullPhotoDescr a,
-  .dateOfCreated{
+  .dateOfCreated {
     font-size: 12px;
   }
 
 
 }
 
-@media(max-width: 576px) {
+@media (max-width: 576px) {
   .backBtn {
     font-size: 12px;
     margin-bottom: 6px;

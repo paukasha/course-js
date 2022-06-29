@@ -7,7 +7,7 @@
 }
 
 
-.photosContainer  {
+.photosContainer {
   position: relative;
   height: 544px;
   margin-bottom: 40px;
@@ -47,7 +47,7 @@
 }
 
 
-.about  {
+.about {
   position: relative;
   margin-bottom: 100px;
   padding: 20px;
@@ -198,7 +198,7 @@
   }
 }
 
-@media(max-width: 576px) {
+@media (max-width: 576px) {
   .mainTitle {
     font-size: 32px;
     line-height: 52px;

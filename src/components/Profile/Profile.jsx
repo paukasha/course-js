@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./profile.m.css";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/reducers/auth";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useRef, useState} from 'react';
+import styles from './profile.m.css';
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../../redux/reducers/auth';
+import {useNavigate} from 'react-router-dom';
 
 const Profile = (props) => {
   const user = useSelector((state) => state.user.currentUser);
@@ -21,9 +21,9 @@ const Profile = (props) => {
         setProfileBtnsShow(false);
       }
     };
-    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener('click', handleClickOutside, true);
     return () => {
-      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener('click', handleClickOutside, true);
     };
   }, [isProfileBtnsShow]);
 
@@ -34,12 +34,12 @@ const Profile = (props) => {
   const goToProfile = (e) => {
     e.stopPropagation();
     setProfileBtnsShow(false);
-    navigate("photos");
+    navigate('photos');
   };
 
   const goOut = () => {
     dispatch(logout());
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -59,7 +59,7 @@ const Profile = (props) => {
         <div className={styles.profileBtns}>
           <button
             type="button"
-            className={styles.profileBtn + " " + "btn-reset"}
+            className={styles.profileBtn + ' ' + 'btn-reset'}
             onClick={goToProfile}
           >
             Профиль
@@ -67,10 +67,10 @@ const Profile = (props) => {
 
           <button
             type="button"
-            className={styles.logoutBtn + " " + "btn-reset"}
+            className={styles.logoutBtn + ' ' + 'btn-reset'}
             onClick={() => goOut()}
           >
-            Выйти{" "}
+            Выйти{' '}
           </button>
         </div>
       )}

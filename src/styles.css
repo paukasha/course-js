@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: 'Montserrat', sans-serif;
   src: url('./fonts/Montserrat-Regular.woff') format('woff');
@@ -21,10 +20,12 @@
   --color-gray: #858585;
   --color-tundora: #454545;
   --color-bright-turquoise: #00ffcb;
-  --color-background:  #45454552;
+  --color-background: #45454552;
   --color-main-title: #11d9b0;
-  --color-backgr-img: rgba(48,45,45, 0.59);
+  --color-backgr-img: rgba(48, 45, 45, 0.59);
   --color-profile-btns-background: #625656;
+  --color-liked-by-user: #8f4cc1;
+  --color-dark-bgc: #1e1a1a59;
 }
 
 html {
@@ -83,7 +84,7 @@ ul {
 
 .swiper-container {
   height: 544px;
-  background-color:  var(--color-background);
+  background-color: var(--color-background);
 }
 
 .swiper-pagination-bullet {
@@ -118,7 +119,6 @@ ul {
   background-color: var(--color-black);
   opacity: 1;
 }
-
 
 
 .swiper-pagination-bullet-active::before {
@@ -165,7 +165,6 @@ ul {
 }
 
 
-
 .swiper-button-next,
 .swiper-button-prev {
   width: 40px !important;
@@ -191,7 +190,7 @@ ul {
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
- opacity: 1;
+  opacity: 1;
 }
 
 .swiper-button-next:after,
@@ -199,7 +198,7 @@ ul {
   content: '' !important;
 }
 
-@media(max-width: 1024px) {
+@media (max-width: 1024px) {
   .container {
     padding: 0 20px;
   }
@@ -217,9 +216,7 @@ ul {
 }
 
 
-
-
-@media(max-width: 576px) {
+@media (max-width: 576px) {
   .swiper-container {
     height: 100%;
   }

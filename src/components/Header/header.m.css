@@ -18,7 +18,7 @@
   width: 200px;
 }
 
-.link{
+.link {
   font-size: 20px;
   color: var(--color-eminence);
   text-transform: uppercase;
@@ -26,11 +26,11 @@
 }
 
 .link:hover {
-   color: var(--color-eucalyptus);
- }
+  color: var(--color-eucalyptus);
+}
 
 
-@media(max-width: 1024px) {
+@media (max-width: 1024px) {
   .list {
     margin-right: 0;
   }
@@ -38,11 +38,12 @@
 }
 
 
-@media(max-width: 576px) {
+@media (max-width: 576px) {
 
   .header {
     padding: 10px;
   }
+
   .list {
     display: none;
   }

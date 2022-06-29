@@ -3,7 +3,6 @@
   overflow: hidden;
   border-radius: 5px;
   margin-bottom: 20px;
-  /*background-color: var( --color-backgr-img);*/
 }
 
 .basePhoto {
@@ -28,7 +27,6 @@
   height: 100%;
   z-index: 2;
   opacity: 0;
-  /*background-color: var( --color-backgr-img);*/
   transition: opacity .3s linear;
 }
 
@@ -53,7 +51,7 @@
   display: block;
   object-fit: cover;
   max-width: 40px;
-  width: 100%;
+  width: 40%;
   border-radius: 100%;
   overflow: hidden;
   margin-right: 10px;
@@ -66,12 +64,15 @@
   color: var(--color-white);
   display: flex;
   height: 100%;
-  width: 100%;
+  width: 73%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .photoContent:hover > .photoLink {
   opacity: 1;
-  transition: opacity .3s linear;
+  background-color: var(--color-dark-bgc);
+  transition: opacity .3s linear, background-color .3s linear;
 }
 
 .photoContent:hover > .authorLink {
