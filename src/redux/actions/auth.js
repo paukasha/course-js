@@ -18,7 +18,7 @@ export const login = () => {
   return async dispatch => {
     if (accessToken) {
       try {
-        await axios.get('https://api.unsplash.com/me', {
+        return await axios.get('https://api.unsplash.com/me', {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
@@ -38,9 +38,7 @@ export const login = () => {
 export const auth = (codeSearchParam, cback) => {
   let accessToken = localStorage.getItem('accessToken')
   return async dispatch => {
-
     if (codeSearchParam) {
-
       try {
         return await axios.post(oauthUrl, null, {
             params: {

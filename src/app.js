@@ -1,4 +1,4 @@
-import React, {useEffect, Suspense} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import {Route, Routes, useNavigate, useSearchParams} from 'react-router-dom';
 import './styles.css';
 import MainPage from '@/pages/MainPage/MainPage';
@@ -12,29 +12,28 @@ import Layout from '@/components/Layout/Layout';
 import Spinner from '@/components/Loader/Spinner';
 
 import {PrivateAuth} from './hoc/PrivateAuth';
-import ProfileContent from './pages/ProfileContent/ProfileContent';
 
-// const ProfileContent = React.lazy(() => import('@/routes/ProfileContent/ProfileContent'));
+const ProfileContent = React.lazy(() => import('@/pages/ProfileContent/ProfileContent'));
 const PhotoPage = React.lazy(() => import('@/pages/PhotoPage/PhotoPage'));
 
 const App = () => {
   const navigate = useNavigate(),
     [searchParams, setSearchParams] = useSearchParams(),
     dispatch = useDispatch();
+  const accessToken = localStorage.getItem('accessToken');
 
-  const codeSearchParam = searchParams.get('code');
-  // const photoses = useSelector((state) => state.main.photos);
   useEffect(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
     let params = Object.fromEntries(urlSearchParams.entries());
 
-    dispatch(
-      auth(params?.code, () => {
-        params.toString();
-        window.history.pushState({}, document.title, window.location.pathname);
-        navigate('photos');
-      })
-    );
+      dispatch(
+        auth(params?.code, () => {
+          params.toString();
+          window.history.pushState({}, document.title, window.location.pathname);
+          navigate('photos');
+        })
+      );
+
     dispatch(getLocation());
     dispatch(getPhotos());
   }, []);
@@ -44,19 +43,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<MainPage/>}/>
-          {/* <Route path="photos" element={*/}
-
-          {/*     <ProfileContent/>}*/}
-
-          {/*/>*/}
-
           <Route
             path="photos"
             element={
-              <PrivateAuth>
-                {/*<Suspense fallback={<Spinner/>}>*/}
+              <PrivateAuth isAuth={accessToken}>
+                <Suspense fallback={<Spinner/>}>
                   <ProfileContent/>
-                {/*</Suspense>*/}
+                </Suspense>
               </PrivateAuth>
             }
           />
@@ -64,7 +57,7 @@ const App = () => {
           <Route
             path="photos/:photoId"
             element={
-              <PrivateAuth>
+              <PrivateAuth isAuth={accessToken}>
                 <Suspense fallback={<Spinner/>}>
                   <PhotoPage/>
                 </Suspense>

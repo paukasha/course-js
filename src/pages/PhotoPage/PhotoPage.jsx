@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import styles from './photoPage.m.css';
 import {useNavigate, useParams} from 'react-router-dom';
 import Like from '../../components/Like/Like';

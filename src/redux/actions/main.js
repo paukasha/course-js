@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {setLocation, setPhotos} from '../reducers/main';
+import {setLocation} from '../reducers/main';
 
 let photosUrl = [];
 

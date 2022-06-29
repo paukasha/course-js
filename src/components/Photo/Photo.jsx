@@ -4,7 +4,6 @@ import '../Loader/spinner.m.css';
 import {Link} from 'react-router-dom';
 import Like from '../Like/Like';
 import Spinner from '../Loader/Spinner';
-import {useSelector} from 'react-redux';
 
 const Photo = ({photo, loading}) => {
   return (

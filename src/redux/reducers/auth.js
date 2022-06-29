@@ -3,7 +3,7 @@ const LOGIN = 'LOGIN',
   IS_LOADING = 'IS_LOADING';
 
 const defaultState = {
-  currentUser: {},
+  currentUser: null,
   isAuth: false,
   isLoading: true
 }

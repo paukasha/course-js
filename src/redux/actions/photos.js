@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {setLocation, setPhotos} from '../reducers/main';
-import {setCurrentPhoto, setOrDeleteLike, setContent} from '../reducers/photos';
+import {setPhotos} from '../reducers/main';
+import {setContent, setCurrentPhoto, setOrDeleteLike} from '../reducers/photos';
 import {setIsLoading} from '../reducers/auth';
 
 import {preloadImage} from '@/helpers/preloadImage'
