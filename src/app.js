@@ -5,7 +5,7 @@ import MainPage from '@/pages/MainPage/MainPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {auth} from '@/redux/actions/auth';
 import {getLocation} from '@/redux/actions/main';
-import {getPhotos} from '@/redux/actions/photos';
+import {getContent} from '@/redux/actions/photos';
 import NotFound from '@/pages/NotFound/NotFound';
 
 import Layout from '@/components/Layout/Layout';
@@ -35,7 +35,7 @@ const App = () => {
       );
 
     dispatch(getLocation());
-    dispatch(getPhotos());
+    dispatch(getContent());
   }, []);
 
   return (

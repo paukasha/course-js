@@ -12,7 +12,7 @@ SwiperCore.use([Pagination, Navigation, A11y]);
 
 function MainPage() {
 
-  const photos = useSelector((state) => state.main.photos),
+  const photos = useSelector((state) => state.photos.content.slice(0,9)),
     isAuth = useSelector((state) => state.user.isAuth);
 
   return (<section>

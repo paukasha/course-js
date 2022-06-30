@@ -3,19 +3,12 @@ const GET_PHOTOS = 'GET_PHOTOS',
   IS_LOADING = 'IS_LOADING'
 
 const defaultState = {
-  photos: [],
   location: '',
   isLoading: true,
 }
 
 export default function main(state = defaultState, action) {
   switch (action.type) {
-    case GET_PHOTOS:
-      return {
-        ...state,
-        photos: action.payload
-      }
-
     case GET_LOCATION:
       return {
         ...state,

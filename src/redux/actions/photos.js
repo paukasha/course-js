@@ -1,39 +1,9 @@
 import axios from 'axios';
-import {setPhotos} from '../reducers/main';
-import {setContent, setCurrentPhoto, setOrDeleteLike} from '../reducers/photos';
-import {setIsLoading} from '../reducers/auth';
+import { setPhotos } from '../reducers/main';
+import { setContent, setCurrentPhoto, setOrDeleteLike } from '../reducers/photos';
+import { setIsLoading } from '../reducers/auth';
 
-import {preloadImage} from '@/helpers/preloadImage'
-
-export const getPhotos = () => {
-  let url = 'https://api.unsplash.com/photos?per_page=10';
-  return async (dispatch) => {
-    try {
-      const res = await axios.get(url, {
-        headers: {
-          Authorization: `Client-ID avGYLy8xj-R8I3tiRSkeVZvRV0R39Ws34mZod3qn3Zo`,
-        },
-      }).then(res => {
-        let photosList = res.data
-        photosList = photosList.map((el) => {
-          preloadImage(el.urls.full).then(res => {
-            return {
-              ...el,
-            }
-          })
-
-          return el
-        })
-        return photosList
-      }).then(photosList => {
-        dispatch(setPhotos(photosList));
-      })
-
-    } catch (e) {
-      console.log(e);
-    }
-  };
-};
+import { preloadAsBlob } from '@/helpers/preloadAsBlob'
 
 export const setOrDeleteLikeByUser = (photo) => {
   let accessToken = localStorage.getItem('accessToken')
@@ -75,9 +45,10 @@ export const getCurrentPhoto = (id) => {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
-      }).then(res => {
+      }).then(async (res) => {
         let currentPhoto = res.data
-        preloadImage(currentPhoto.urls.full)
+        const result = await preloadAsBlob(currentPhoto.urls.full);
+        currentPhoto.urls.full = result;
         return dispatch(setCurrentPhoto(currentPhoto))
       })
     } catch (e) {
@@ -94,18 +65,27 @@ export const getContent = (currentPage, isLoading) => {
         headers: {
           Authorization: `Client-ID avGYLy8xj-R8I3tiRSkeVZvRV0R39Ws34mZod3qn3Zo`,
         }
-      }).then(res => {
-        let photos = res.data
-        photos = photos.map(el => {
-          preloadImage(el.urls.full).then(res => {
-            return {
-              ...el,
-            }
-          })
+      }).then(async (res) => {
+        let photos = res.data;
+
+        const asyncArray = photos.map((el) => async () => {
+
+          const result = await preloadAsBlob(el.urls.full);
+
+          const image = new Image();
+
+          image.src = result;
+
+          return image.src;
+        });
+
+        const result = await Promise.all(asyncArray.map((fn) => fn()));
+
+        photos = photos.map((el, index) => {
+          el.urls.full = result[index];
 
           return el
-        })
-
+        });
 
         return {
           photos,
