@@ -12,19 +12,19 @@ const Photo = React.lazy(() => import('@/components/Photo/Photo'));
 function ProfileContent() {
   const dispatch = useDispatch(),
     location = useLocation();
+
   const isLoading = useSelector((state) => state.photos.isLoading),
     currentPage = useSelector((state) => state.photos.currentPage),
     photos = useSelector((state) => state.photos.content);
 
   useEffect(() => {
-    dispatch(getContent(currentPage, isLoading));
+      dispatch(getContent(currentPage, isLoading));
   }, [isLoading]);
 
   const loadMore = () => {
     dispatch(setIsLoading(true));
   };
 
-  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <div className="container">

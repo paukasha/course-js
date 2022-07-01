@@ -6,9 +6,9 @@ export async function preloadAsBlob(url) {
     });
   }
 
-  const responce = await fetch(url);
+  const response = await fetch(url);
 
-  const blob = await responce.blob();
+  const blob = await response.blob();
 
   const reader = new FileReader();
 

@@ -19,23 +19,24 @@ const PhotoPage = React.lazy(() => import('@/pages/PhotoPage/PhotoPage'));
 const App = () => {
   const navigate = useNavigate(),
     [searchParams, setSearchParams] = useSearchParams(),
-    dispatch = useDispatch();
+    dispatch = useDispatch(),
+    loading = useSelector(state => state.photos.isLoading);
+
   const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
     let params = Object.fromEntries(urlSearchParams.entries());
 
-      dispatch(
-        auth(params?.code, () => {
-          params.toString();
-          window.history.pushState({}, document.title, window.location.pathname);
-          navigate('photos');
-        })
-      );
+    dispatch(
+      auth(params?.code, () => {
+        params.toString();
+        window.history.pushState({}, document.title, window.location.pathname);
+        navigate('photos');
+      })
+    );
 
-    dispatch(getLocation());
-    dispatch(getContent());
+
   }, []);
 
   return (

@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { setPhotos } from '../reducers/main';
-import { setContent, setCurrentPhoto, setOrDeleteLike } from '../reducers/photos';
-import { setIsLoading } from '../reducers/auth';
+import {setPhotos} from '../reducers/main';
+import {setContent, setCurrentPhoto, setOrDeleteLike} from '../reducers/photos';
+import {setIsLoading} from '../reducers/auth';
 
-import { preloadAsBlob } from '@/helpers/preloadAsBlob'
+import {preloadAsBlob} from '@/helpers/preloadAsBlob';
 
 export const setOrDeleteLikeByUser = (photo) => {
-  let accessToken = localStorage.getItem('accessToken')
+  let accessToken = localStorage.getItem('accessToken');
   return async dispatch => {
     try {
       if (photo.liked_by_user == false) {
@@ -24,12 +24,12 @@ export const setOrDeleteLikeByUser = (photo) => {
           }
         })
 
-        dispatch(setOrDeleteLike(res.data.photo))
-        dispatch(setCurrentPhoto(res.data.photo))
+        dispatch(setOrDeleteLike(res.data.photo));
+        dispatch(setCurrentPhoto(res.data.photo));
       }
 
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
 
   }
@@ -52,12 +52,13 @@ export const getCurrentPhoto = (id) => {
         return dispatch(setCurrentPhoto(currentPhoto))
       })
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 }
 
 export const getContent = (currentPage, isLoading) => {
+
   let accessToken = localStorage.getItem('accessToken')
   return async dispatch => {
     if (isLoading) {
@@ -87,15 +88,11 @@ export const getContent = (currentPage, isLoading) => {
           return el
         });
 
-        return {
-          photos,
-          total: res.headers['x-total']
-        }
-
-      }).then((res) => {
         currentPage += 1
-        dispatch(setContent(res.photos, currentPage, res.total))
-        setIsLoading(false)
+        dispatch(setContent(photos, currentPage, res.headers['x-total']))
+
+      }).catch(e => {
+        console.log(e)
       }).finally(() => {
         setIsLoading(false)
       })

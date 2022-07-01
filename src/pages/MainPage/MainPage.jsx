@@ -1,44 +1,57 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './mainPage.m.css';
 
 import SwiperCore, {A11y, Navigation, Pagination} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import '@import/swiper/swiper-bundle.min.css';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {unsplashAuthLink} from '@/redux/actions/auth';
 import {Link} from 'react-router-dom';
+import Spinner from '../../components/Loader/Spinner';
+import {getLocation} from '../../redux/actions/main';
+import {getContent} from '../../redux/actions/photos';
 
 SwiperCore.use([Pagination, Navigation, A11y]);
 
 function MainPage() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getLocation());
+    dispatch(getContent(1, true));
+  },[])
 
-  const photos = useSelector((state) => state.photos.content.slice(0,9)),
-    isAuth = useSelector((state) => state.user.isAuth);
+  const photos = useSelector((state) => state.photos.content.slice(0, 9)),
+    isAuth = useSelector((state) => state.user.isAuth),
+    isLoading = useSelector((state) => state.photos.isLoading);
 
   return (<section>
-      <div className={styles.photosContainer}>
+      <div className={styles.photosContainer} style={{height: isLoading ? '100px' : '544px'}}>
+
         <div className={styles.mainContainer}>
-          <Swiper
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-              dynamicMainBullets: 4,
-            }}
-            spaceBetween={30}
-            navigation={true}
-            slidesPerView={1}
-          >
-            {photos.map((el) => {
-              return (<SwiperSlide key={el.id}>
-                  <img src={el.urls.full} alt=""/>
-                  <span className={styles.mainTitle}>
+          {isLoading ? <Spinner/> :
+            <Swiper
+              pagination={{
+                clickable: true,
+                dynamicBullets: true,
+                dynamicMainBullets: 4,
+              }}
+              spaceBetween={30}
+              navigation={true}
+              slidesPerView={1}
+            >
+              {photos.map((el) => {
+                return (<SwiperSlide key={el.id}>
+                    <img src={el.urls.full} alt=""/>
+                    <span className={styles.mainTitle}>
                     Приложение для&nbsp;просмотра фотографий
                   </span>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          }
         </div>
+
       </div>
 
       <div className="container">

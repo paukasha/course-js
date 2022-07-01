@@ -11,8 +11,7 @@ const PhotoPage = () => {
   let {photoId} = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuth = useSelector((state) => state.user.isAuth),
-    currentPhoto = useSelector((state) => state.photos.currentPhoto);
+  const currentPhoto = useSelector((state) => state.photos.currentPhoto);
   const goBack = () => {
     navigate(-1);
     dispatch(setCurrentPhoto(''))
@@ -26,6 +25,7 @@ const PhotoPage = () => {
 
   useEffect(() => {
     dispatch(getCurrentPhoto(photoId));
+
   }, []);
 
   return (
