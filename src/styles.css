@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Montserrat', sans-serif;
-  src: url('./fonts/Montserrat-Regular.woff') format('woff');
+  src: url('assets/fonts/Montserrat-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -179,13 +179,13 @@ ul {
 .swiper-button-next {
   right: 44px !important;
   transform: translate(50%, -50%);
-  background-image: url(./img/svg/right-chevron.svg);
+  background-image: url(./assets/images/svg/right-chevron.svg);
 }
 
 .swiper-button-prev {
   left: 44px !important;
   transform: rotate(180deg) translate(50%, 50%);
-  background-image: url(./img/svg/right-chevron.svg);
+  background-image: url(./assets/images/svg/right-chevron.svg);
 }
 
 .swiper-button-next:hover,

@@ -2,23 +2,21 @@ import React, {Suspense, useEffect} from 'react';
 import styles from './profileContent.m.css';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {useLocation} from 'react-router-dom';
-import {getContent} from '@/redux/actions/photos';
+import {getPhotos} from '@/redux/actions/photos';
 import {setIsLoading} from '@/redux/reducers/auth';
-import Spinner from '@/components/Loader/Spinner';
+import Spinner from '@components/Spinner/Spinner';
 
-const Photo = React.lazy(() => import('@/components/Photo/Photo'));
+const Photo = React.lazy(() => import('@components/Photo/Photo'));
 
 function ProfileContent() {
-  const dispatch = useDispatch(),
-    location = useLocation();
+  const dispatch = useDispatch();
 
   const isLoading = useSelector((state) => state.photos.isLoading),
     currentPage = useSelector((state) => state.photos.currentPage),
     photos = useSelector((state) => state.photos.content);
 
   useEffect(() => {
-      dispatch(getContent(currentPage, isLoading));
+      dispatch(getPhotos(currentPage, isLoading));
   }, [isLoading]);
 
   const loadMore = () => {

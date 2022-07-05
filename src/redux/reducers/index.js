@@ -6,9 +6,9 @@ import main from './main';
 import photos from './photos';
 
 const rootReducer = combineReducers({
-  user: auth,
-  main: main,
-  photos: photos
+  auth,
+  main,
+  photos
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))

@@ -18,7 +18,6 @@ export default function auth(state = defaultState, action) {
       }
     }
 
-
     case LOGOUT:
       localStorage.removeItem('accessToken')
       return {
@@ -39,11 +38,9 @@ export default function auth(state = defaultState, action) {
   }
 }
 
-export const setUser = user => ({type: LOGIN, payload: user})
-
-export const logout = () => ({type: LOGOUT})
-
-export const setIsLoading = (bool) => ({type: IS_LOADING, payload: bool})
+export const setUser = user => ({type: LOGIN, payload: user});
+export const logout = () => ({type: LOGOUT});
+export const setIsLoading = (bool) => ({type: IS_LOADING, payload: bool});
 
 
 

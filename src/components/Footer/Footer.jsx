@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './footer.m.css';
-import logo from '@img/logo-footer.png';
+import logo from '@images/logo-footer.png';
 
 const Footer = () => {
   return (
@@ -27,18 +27,21 @@ const Footer = () => {
               <li className={styles.socialLostItem}>
                 <a
                   href="https://vk.com/id30847399"
+                  target="_blank"
                   className={[styles.link, styles.vk].join(' ')}
                 />
               </li>
               <li className={styles.socialLostItem}>
                 <a
                   href="https://www.google.com/"
+                  target="_blank"
                   className={[styles.link, styles.google].join(' ')}
                 />
               </li>
               <li className={styles.socialLostItem}>
                 <a
                   href="https://ok.ru/"
+                  target="_blank"
                   className={[styles.link, styles.ok].join(' ')}
                 />
               </li>

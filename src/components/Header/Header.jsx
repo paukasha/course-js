@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './header.m.css';
-import logo from '@img/logo.png';
-import Location from '@/components/Header/Location/Location';
-import SignIn from '@/components/Header/Signin/Signin';
-import Profile from '@/components/Profile/Profile';
+import logo from '@images/logo.png';
+import Location from '@components/Header/Location/Location';
+import SignIn from '@components/Header/Signin/Signin';
+import Profile from '@components/Profile/Profile';
 import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 const Header = () => {
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   return (
     <div className="container">

@@ -1,16 +1,12 @@
 import React, {Suspense, useEffect} from 'react';
-import {Route, Routes, useNavigate, useSearchParams} from 'react-router-dom';
 import './styles.css';
-import MainPage from '@/pages/MainPage/MainPage';
-import {useDispatch, useSelector} from 'react-redux';
+import {Route, Routes, useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import {auth} from '@/redux/actions/auth';
-import {getLocation} from '@/redux/actions/main';
-import {getContent} from '@/redux/actions/photos';
 import NotFound from '@/pages/NotFound/NotFound';
-
-import Layout from '@/components/Layout/Layout';
-import Spinner from '@/components/Loader/Spinner';
-
+import MainPage from '@/pages/MainPage/MainPage';
+import Layout from '@components/Layout/Layout';
+import Spinner from '@components/Spinner/Spinner';
 import {PrivateAuth} from './hoc/PrivateAuth';
 
 const ProfileContent = React.lazy(() => import('@/pages/ProfileContent/ProfileContent'));
@@ -18,9 +14,7 @@ const PhotoPage = React.lazy(() => import('@/pages/PhotoPage/PhotoPage'));
 
 const App = () => {
   const navigate = useNavigate(),
-    [searchParams, setSearchParams] = useSearchParams(),
-    dispatch = useDispatch(),
-    loading = useSelector(state => state.photos.isLoading);
+    dispatch = useDispatch();
 
   const accessToken = localStorage.getItem('accessToken');
 
@@ -35,8 +29,6 @@ const App = () => {
         navigate('photos');
       })
     );
-
-
   }, []);
 
   return (

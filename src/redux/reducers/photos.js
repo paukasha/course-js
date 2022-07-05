@@ -17,7 +17,12 @@ export default function photos(state = defaultState, action) {
     case SET_CONTENT:
       return {
         ...state,
-        content: [...state.content, ...action.payload.content],
+        content: [...state.content, ...action.payload.content].reduce((prevEl, nextEl) => {
+          if (!prevEl.find(item => item.id === nextEl.id)) {
+            prevEl.push(nextEl);
+          }
+          return prevEl;
+        }, []),
         currentPage: action.payload.currentPage,
         photoTotalCount: action.payload.photoTotalCount,
         isLoading: false
@@ -53,13 +58,13 @@ export default function photos(state = defaultState, action) {
 }
 
 
-export const setContent = (content, currentPage, photoTotalCount) => ({
+export const setPhotos = (content, currentPage, photoTotalCount) => ({
   type: SET_CONTENT,
   payload: {content, currentPage, photoTotalCount}
 })
 
-export const setOrDeleteLike = (photo) => ({type: SET_OR_DELETE_LIKE, payload: photo})
+export const setOrDeleteLike = (photo) => ({type: SET_OR_DELETE_LIKE, payload: photo});
+export const setCurrentPhoto = photo => ({type: SET_CURRENT_PHOTO, payload: photo});
 
-export const setCurrentPhoto = photo => ({type: SET_CURRENT_PHOTO, payload: photo})
 
-export const setIsLoading = (bool) => ({type: IS_LOADING, payload: bool})
+

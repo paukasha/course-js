@@ -1,9 +1,6 @@
 import axios from 'axios';
 import {setLocation} from '../reducers/main';
 
-let photosUrl = [];
-
-
 export const getLocation = () => {
   let url = 'https://ipinfo.io?token=e2f6ce2220f5e9';
   return async (dispatch) => {

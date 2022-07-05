@@ -25,6 +25,4 @@ export default function main(state = defaultState, action) {
 }
 
 export const setLocation = location => ({type: GET_LOCATION, payload: location})
-export const setPhotos = photo => ({type: GET_PHOTOS, payload: photo})
-
 export const setIsLoading = (bool) => ({type: IS_LOADING, payload: bool})

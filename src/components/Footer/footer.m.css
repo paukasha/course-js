@@ -59,7 +59,7 @@
   top: 0;
   width: 16px;
   height: 16px;
-  background-image: url('../../img/svg/telephone.svg');
+  background-image: url('../../assets/images/svg/telephone.svg');
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -71,7 +71,7 @@
   top: 0;
   width: 16px;
   height: 16px;
-  background-image: url('../../img/svg/mail.svg');
+  background-image: url('../../assets/images/svg/mail.svg');
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -100,15 +100,15 @@
 }
 
 .vk {
-  background-image: url('../../img/svg/vk.svg');
+  background-image: url('../../assets/images/svg/vk.svg');
 }
 
 .google {
-  background-image: url('../../img/svg/google.svg');
+  background-image: url('../../assets/images/svg/google.svg');
 }
 
 .ok {
-  background-image: url('../../img/svg/ok-logo.svg');
+  background-image: url('../../assets/images/svg/ok-logo.svg');
 }
 
 .footerBottom {

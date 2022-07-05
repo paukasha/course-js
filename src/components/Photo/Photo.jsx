@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './photo.m.css';
-import '../Loader/spinner.m.css';
 import {Link} from 'react-router-dom';
-import Like from '../Like/Like';
-import Spinner from '../Loader/Spinner';
+import Like from '@components/Like/Like';
+import Spinner from '@components/Spinner/Spinner';
 
 const Photo = ({photo, loading}) => {
   return (

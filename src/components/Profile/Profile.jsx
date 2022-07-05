@@ -1,16 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './profile.m.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {logout} from '../../redux/reducers/auth';
+import {logout} from '@/redux/reducers/auth';
 import {useNavigate} from 'react-router-dom';
 
-const Profile = (props) => {
-  const user = useSelector((state) => state.user.currentUser);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [isProfileBtnsShow, setProfileBtnsShow] = useState(false);
+const Profile = () => {
+  const user = useSelector((state) => state.auth.currentUser),
+    dispatch = useDispatch(),
+    navigate = useNavigate();
 
-  const userProfileRef = useRef(null);
+  const [isProfileBtnsShow, setProfileBtnsShow] = useState(false),
+    userProfileRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

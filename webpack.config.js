@@ -35,7 +35,6 @@ module.exports = {
               import: true,
               modules: {
                 mode: 'local',
-
                 localIdentName: '[name]__[local]--[hash:base64:5]',
               },
             },
@@ -63,8 +62,9 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     modules: ['node_modules'],
     alias: {
-      '@img': path.resolve(__dirname, './src/img/'),
       '@': path.resolve(__dirname, './src/'),
+      '@components': path.resolve(__dirname, './src//components/'),
+      '@images': path.resolve(__dirname, './src//assets/images/'),
       '@import': path.resolve(__dirname, './node_modules/'),
     },
   },

@@ -2,11 +2,11 @@ import {setUser} from '../reducers/auth'
 import axios from 'axios';
 
 const production = process.env.NODE_ENV === 'production';
+
 let oauthUrl = 'https://unsplash.com/oauth/token',
   client_id = 'avGYLy8xj-R8I3tiRSkeVZvRV0R39Ws34mZod3qn3Zo',
   client_secret = '5mvRrbXVYQDCpa7fYclguxWgFypVpz5ByKxI4CMAHoA',
   redirect_uri = production ? 'http://c914428q.beget.tech/' : 'http://localhost:3001/',
-  code = '',
   grant_type = 'authorization_code',
   scope = 'public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections',
   response_type = 'code';
@@ -46,7 +46,7 @@ export const auth = (codeSearchParam, cback) => {
               client_secret: client_secret,
               redirect_uri: redirect_uri,
               code: codeSearchParam,
-              grant_type: 'authorization_code'
+              grant_type: grant_type
             }
           }
         ).then(response => {

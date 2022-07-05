@@ -1,27 +1,26 @@
 import React, {useEffect} from 'react';
 import styles from './mainPage.m.css';
-
 import SwiperCore, {A11y, Navigation, Pagination} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import '@import/swiper/swiper-bundle.min.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {unsplashAuthLink} from '@/redux/actions/auth';
 import {Link} from 'react-router-dom';
-import Spinner from '../../components/Loader/Spinner';
-import {getLocation} from '../../redux/actions/main';
-import {getContent} from '../../redux/actions/photos';
+import {unsplashAuthLink} from '@/redux/actions/auth';
+import Spinner from '@components/Spinner/Spinner';
+import {getLocation} from '@/redux/actions/main';
+import {getPhotos} from '@/redux/actions/photos';
 
 SwiperCore.use([Pagination, Navigation, A11y]);
 
-function MainPage() {
+const MainPage = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getLocation());
-    dispatch(getContent(1, true));
-  },[])
+    dispatch(getPhotos(1, true));
+  }, [])
 
   const photos = useSelector((state) => state.photos.content.slice(0, 9)),
-    isAuth = useSelector((state) => state.user.isAuth),
+    isAuth = useSelector((state) => state.auth.isAuth),
     isLoading = useSelector((state) => state.photos.isLoading);
 
   return (<section>
