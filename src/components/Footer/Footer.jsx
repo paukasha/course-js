@@ -3,6 +3,7 @@ import styles from './footer.m.css';
 import logo from '@images/logo-footer.png';
 
 const Footer = () => {
+  const year = new Date().getFullYear()
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -11,10 +12,10 @@ const Footer = () => {
             <span>Контакты</span>
             <ul className={styles.contactsList}>
               <li className={styles.listItemTel}>
-                <a href="tel:+79144233022">+7(914)-423-30-22</a>
+                <a href="tel:+79999999999">+7(999)-999-99-99</a>
               </li>
               <li className={styles.listItemMail}>
-                <a href="email:pd_pavl@mail.ru">pd_pavl@mail.ru</a>
+                <a href="email:test@mail.ru">test@mail.ru</a>
               </li>
             </ul>
           </div>
@@ -26,7 +27,7 @@ const Footer = () => {
             <ul className={styles.socialList}>
               <li className={styles.socialLostItem}>
                 <a
-                  href="https://vk.com/id30847399"
+                  href="https://vk.com/"
                   target="_blank"
                   className={[styles.link, styles.vk].join(' ')}
                 />
@@ -50,7 +51,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.footerBottom}>
-        <small className={styles.footerCopy}>©2022 Pavlenko Darya</small>
+        <small className={styles.footerCopy}>©{year} Pavlenko Darya</small>
       </div>
     </footer>
   );

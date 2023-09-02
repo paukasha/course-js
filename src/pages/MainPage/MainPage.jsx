@@ -58,9 +58,7 @@ const MainPage = () => {
           <div className={styles.about}>
             <h2 className={styles.aboutTitle}>O нас</h2>
             <span className={styles.aboutTitleText}>
-              Это веб-приложение сделано для&nbsp;защиты дипломного проекта курс
-              «JavaScript с&nbsp;нуля» профессия «Веб-разработчик»
-              от&nbsp;SkillBox.
+              Приложение для просмотра фотографий
             </span>
           </div>
 
