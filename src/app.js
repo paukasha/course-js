@@ -11,7 +11,6 @@ import {PrivateAuth} from './hoc/PrivateAuth';
 
 const ProfileContent = React.lazy(() => import('@/pages/ProfileContent/ProfileContent'));
 const PhotoPage = React.lazy(() => import('@/pages/PhotoPage/PhotoPage'));
-
 const App = () => {
   const navigate = useNavigate(),
     dispatch = useDispatch();

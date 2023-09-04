@@ -5,12 +5,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
-
+const Dotenv = require('dotenv-webpack');
 module.exports = {
   entry: path.resolve(__dirname, './src/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/',
+    publicPath: production ? '/course-js/' : '/',
     filename: production ? '[name].[contenthash].js' : '[name].js',
   },
   optimization: {
@@ -59,6 +59,13 @@ module.exports = {
   },
 
   resolve: {
+    fallback: {
+      "path": require.resolve("path-browserify"),
+      "os": require.resolve("os-browserify/browser"),
+      "crypto": require.resolve("crypto-browserify"),
+      "buffer": require.resolve("buffer/"),
+      "stream": require.resolve("stream-browserify")
+    },
     extensions: ['.js', '.jsx'],
     modules: ['node_modules'],
     alias: {
@@ -69,6 +76,10 @@ module.exports = {
     },
   },
   plugins: [
+    new Dotenv(),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({

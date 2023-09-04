@@ -1,12 +1,13 @@
 import {setUser} from '../reducers/auth'
 import axios from 'axios';
-
+import * as dotenv from "dotenv";
+dotenv.config();
 const production = process.env.NODE_ENV === 'production';
 
 let oauthUrl = 'https://unsplash.com/oauth/token',
-  client_id = 'avGYLy8xj-R8I3tiRSkeVZvRV0R39Ws34mZod3qn3Zo',
-  client_secret = '5mvRrbXVYQDCpa7fYclguxWgFypVpz5ByKxI4CMAHoA',
-  redirect_uri = production ? 'http://c914428q.beget.tech/' : 'http://localhost:3001/',
+  client_id = process.env.REACT_APP_CLIENT_ID,
+  client_secret = process.env.REACT_APP_CLIENT_SECRET,
+  redirect_uri = production ? 'https://paukasha.github.io/course-js/' : 'http://localhost:3001/',
   grant_type = 'authorization_code',
   scope = 'public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections',
   response_type = 'code';
